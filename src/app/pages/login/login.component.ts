@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class LoginComponent implements OnInit {
 
     public form: FormGroup;
 
-    constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private authService: AuthService) {
+    constructor(private fb: FormBuilder, 
+      private snackBar: MatSnackBar, 
+      private authService: AuthService,
+      private router: Router) {
       this.form = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
@@ -34,7 +38,7 @@ export class LoginComponent implements OnInit {
       const senha = this.form.get('password')?.value;
       this.authService.login(email,senha).then(
         () =>{
-          this.snackBar.open('Logado com sucesso', undefined, {duration: 1111});
+          this.router.navigateByUrl('/app/bebida');
         }, erro => {
           this.snackBar.open(erro, undefined, {duration: 1111});
         }

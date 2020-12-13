@@ -16,7 +16,12 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from './service/auth/auth.service';
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { NavigationComponent } from './pages/navigation/navigation.component'; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvciYkOI96YDM2l1Sq8b_Mhs65tAiJG0A",
@@ -33,7 +38,8 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     BebidaComponent,
-    LoginComponent
+    LoginComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,11 @@ const firebaseConfig = {
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-      
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [
     AngularFirestore,
