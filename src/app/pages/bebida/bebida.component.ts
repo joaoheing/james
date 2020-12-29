@@ -10,6 +10,8 @@ export class BebidaComponent implements OnInit {
 
   public bebidas: any;
 
+  displayedColumns = ['nome', 'preco', 'isAlcoolica', 'tipo', 'descricao']
+
   constructor(private firestore: AngularFirestore){
     this.firestore.collection("bebida").snapshotChanges().subscribe(
       (bebidas) => {

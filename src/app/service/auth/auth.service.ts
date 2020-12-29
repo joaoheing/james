@@ -7,6 +7,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 export enum Cargo {
   GERENTE,
+  MAITRE,
   GARCOM,
   CAIXA
 }

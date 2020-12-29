@@ -21,7 +21,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { NavigationComponent } from './pages/navigation/navigation.component'; 
+import { NavigationComponent } from './pages/navigation/navigation.component';
+import { ComidaComponent } from './pages/comida/comida.component'; 
+import {MatTableModule} from '@angular/material/table'; 
+import { LOCALE_ID } from '@angular/core';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvciYkOI96YDM2l1Sq8b_Mhs65tAiJG0A",
@@ -39,7 +42,8 @@ const firebaseConfig = {
     AppComponent,
     BebidaComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
+    ComidaComponent
   ],
   imports: [
     BrowserModule,
@@ -61,10 +65,12 @@ const firebaseConfig = {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatTableModule
   ],
   providers: [
     AngularFirestore,
-    AuthService
+    AuthService,
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent]
 })

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     isFieldInvalid(field: string) {
     }
 
-    async onSubmit() {
+    onSubmit() {
       const email = this.form.get('username')?.value;
       const senha = this.form.get('password')?.value;
       this.authService.login(email,senha).then(
