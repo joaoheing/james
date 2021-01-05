@@ -25,6 +25,11 @@ import { NavigationComponent } from './pages/navigation/navigation.component';
 import { ComidaComponent } from './pages/comida/comida.component'; 
 import {MatTableModule} from '@angular/material/table'; 
 import { LOCALE_ID } from '@angular/core';
+import { BebidaInserirDialogComponent } from './pages/bebida-inserir-dialog/bebida-inserir-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select'; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvciYkOI96YDM2l1Sq8b_Mhs65tAiJG0A",
@@ -37,13 +42,24 @@ const firebaseConfig = {
   measurementId: "G-21N10M86FQ"
 };
 
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "left",
+  allowNegative: false,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: "."
+};
+
 @NgModule({
   declarations: [
     AppComponent,
     BebidaComponent,
     LoginComponent,
     NavigationComponent,
-    ComidaComponent
+    ComidaComponent,
+    BebidaInserirDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,12 +81,17 @@ const firebaseConfig = {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    CurrencyMaskModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   providers: [
     AngularFirestore,
     AuthService,
-    {provide: LOCALE_ID, useValue: 'pt-BR'}
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Adicionar bebida</h1>
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Preço</mat-label>
+        <input matInput currencyMask>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Alcoolica</mat-label>
+        <mat-select>
+            <mat-option value="true">Sim</mat-option>
+            <mat-option value="false">Não</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let t of tipos" [value]="t.value">{{t.label}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Descrição</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+
+</div>
+<div class="footer" mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button cdkFocusInitial>Ok</button>
+</div>
