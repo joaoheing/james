@@ -30,6 +30,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select'; 
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
+
+registerLocaleData(localePt);
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvciYkOI96YDM2l1Sq8b_Mhs65tAiJG0A",
@@ -59,7 +64,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     LoginComponent,
     NavigationComponent,
     ComidaComponent,
-    BebidaInserirDialogComponent
+    BebidaInserirDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

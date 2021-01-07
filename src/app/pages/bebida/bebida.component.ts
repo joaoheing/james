@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BebidaInserirDialogComponent } from '../bebida-inserir-dialog/bebida-inserir-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-bebida',
@@ -12,13 +14,19 @@ export class BebidaComponent implements OnInit {
 
   public bebidas: any;
 
-  displayedColumns = ['nome', 'preco', 'isAlcoolica', 'tipo', 'descricao']
+  displayedColumns = ['nome', 'preco', 'isAlcoolica', 'tipo', 'descricao', 'excluir']
 
   constructor(private firestore: AngularFirestore,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar) {
     this.firestore.collection("bebida").snapshotChanges().subscribe(
       (bebidas) => {
-        this.bebidas = bebidas.map(bebida => bebida.payload.doc.data())
+        this.bebidas = bebidas.map(bebida => {
+          //adicionado o campo id no objeto bebida =>(b)
+          const b = bebida.payload.doc.data() as any;
+          b.id = bebida.payload.doc.id;
+          return b;
+        });
       }
     )
   }
@@ -32,5 +40,31 @@ export class BebidaComponent implements OnInit {
       width: '400px',
     });
   }
+
+  public excluirBebida(bebida: any): void {
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        titulo: "Excluir bebida",
+        descricao: `Você tem certeza que deseja excluir a bebida "${bebida.nome}"?`,
+        labelBotaoConfirmar: "Excluir"
+      }
+    }).afterClosed().subscribe(
+      excluir => {
+        if (excluir) {
+          this.firestore.collection("bebida").doc(bebida.id).delete().then(
+            ()=>{
+              this.snackBar.open("A bebida foi excluida com sucesso!", undefined, {
+                duration: 2000,
+              });
+            },(erro)=>{
+              alert(erro)
+            }
+          );
+        }
+      }
+    );
+  }
+
 
 }
