@@ -33,6 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
+import { TipoBebidaPipe } from './shared/pipes/tipo-bebida.pipe';
+import { BebidaEditarDialogComponent } from './pages/bebida-editar-dialog/bebida-editar-dialog.component';
 
 registerLocaleData(localePt);
 
@@ -65,7 +67,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NavigationComponent,
     ComidaComponent,
     BebidaInserirDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TipoBebidaPipe,
+    BebidaEditarDialogComponent
   ],
   imports: [
     BrowserModule,

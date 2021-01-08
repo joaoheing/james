@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Bebida } from 'src/app/shared/model';
+import { BebidaEditarDialogComponent } from '../bebida-editar-dialog/bebida-editar-dialog.component';
 import { BebidaInserirDialogComponent } from '../bebida-inserir-dialog/bebida-inserir-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
@@ -14,7 +16,7 @@ export class BebidaComponent implements OnInit {
 
   public bebidas: any;
 
-  displayedColumns = ['nome', 'preco', 'isAlcoolica', 'tipo', 'descricao', 'excluir']
+  displayedColumns = ['nome', 'preco', 'isAlcoolica', 'tipo', 'descricao', 'editar', 'excluir']
 
   constructor(private firestore: AngularFirestore,
     public dialog: MatDialog,
@@ -64,6 +66,13 @@ export class BebidaComponent implements OnInit {
         }
       }
     );
+  }
+
+  public editarBebida(bebida: Bebida): void {
+    this.dialog.open(BebidaEditarDialogComponent, {
+      width: '400px',
+      data: bebida
+    });
   }
 
 
