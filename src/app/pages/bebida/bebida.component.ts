@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Bebida } from 'src/app/shared/model';
+import { Bebida, BebidaService } from 'src/app/service/bebida/bebida.service';
 import { BebidaEditarDialogComponent } from '../bebida-editar-dialog/bebida-editar-dialog.component';
 import { BebidaInserirDialogComponent } from '../bebida-inserir-dialog/bebida-inserir-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -18,19 +17,19 @@ export class BebidaComponent implements OnInit {
 
   displayedColumns = ['nome', 'preco', 'isAlcoolica', 'tipo', 'descricao', 'editar', 'excluir']
 
-  constructor(private firestore: AngularFirestore,
+  constructor(private bebidaService: BebidaService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar) {
-    this.firestore.collection("bebida").snapshotChanges().subscribe(
-      (bebidas) => {
-        this.bebidas = bebidas.map(bebida => {
-          //adicionado o campo id no objeto bebida =>(b)
-          const b = bebida.payload.doc.data() as any;
-          b.id = bebida.payload.doc.id;
-          return b;
-        });
-      }
-    )
+      this.bebidaService.listarBebidas().subscribe(
+        (bebidas) => {
+          this.bebidas = bebidas.map(bebida => {
+            //adicionado o campo id no objeto bebida =>(b)
+            const b = bebida.payload.doc.data() as any;
+            b.id = bebida.payload.doc.id;
+            return b;
+          });
+        }
+      )
   }
 
   ngOnInit(): void {
@@ -54,7 +53,7 @@ export class BebidaComponent implements OnInit {
     }).afterClosed().subscribe(
       excluir => {
         if (excluir) {
-          this.firestore.collection("bebida").doc(bebida.id).delete().then(
+          this.bebidaService.excluirBebida(bebida.id).then(
             ()=>{
               this.snackBar.open("A bebida foi excluida com sucesso!", undefined, {
                 duration: 2000,
@@ -62,7 +61,7 @@ export class BebidaComponent implements OnInit {
             },(erro)=>{
               alert(erro)
             }
-          );
+          )
         }
       }
     );

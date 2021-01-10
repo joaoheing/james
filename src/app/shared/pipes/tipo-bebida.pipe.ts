@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { tiposBebida } from '../model';
+import { Tipo } from 'src/app/service/bebida/bebida.service';
 
 @Pipe({
   name: 'tipoBebida'
@@ -7,7 +7,7 @@ import { tiposBebida } from '../model';
 export class TipoBebidaPipe implements PipeTransform {
 
   transform(value: string, ...args: unknown[]): string {
-    return tiposBebida[value] || '';
+    return (Tipo as any)[value] || '';
   }
 
 }

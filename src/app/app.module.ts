@@ -35,6 +35,7 @@ import { registerLocaleData } from '@angular/common';
 import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
 import { TipoBebidaPipe } from './shared/pipes/tipo-bebida.pipe';
 import { BebidaEditarDialogComponent } from './pages/bebida-editar-dialog/bebida-editar-dialog.component';
+import { BebidaService } from './service/bebida/bebida.service';
 
 registerLocaleData(localePt);
 
@@ -100,6 +101,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   providers: [
     AngularFirestore,
     AuthService,
+    BebidaService,
     {provide: LOCALE_ID, useValue: 'pt-BR'},
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
