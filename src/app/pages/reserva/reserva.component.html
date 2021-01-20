@@ -1,0 +1,65 @@
+<div class="header">
+    <button mat-raised-button (click)="adicionarReserva()" color="primary">
+        <mat-icon>add</mat-icon> Adicionar reservas
+    </button>
+</div>
+
+<table mat-table [dataSource]="reservas" class="mat-elevation-z8">
+
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <!-- Data Column -->
+    <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+    </ng-container>
+
+    <!-- Horario Column -->
+    <ng-container matColumnDef="horario">
+        <th mat-header-cell *matHeaderCellDef> Horario </th>
+        <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+    </ng-container>
+
+    <!-- QuantidadeDePessoas Column -->
+    <ng-container matColumnDef="quantidadeDePessoas">
+        <th mat-header-cell *matHeaderCellDef> Quantidade de pessoas </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantidadeDePessoas}} </td>
+    </ng-container>
+
+    <!-- Mesa Column -->
+    <ng-container matColumnDef="mesa">
+        <th mat-header-cell *matHeaderCellDef> Mesa </th>
+        <td mat-cell *matCellDef="let element"> {{element.mesa}} </td>
+    </ng-container>
+
+      <!-- Editar Column -->
+      <!--
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="editarBebida(element)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+    -->
+
+    <!-- Excluir Column -->
+    <!--
+    <ng-container matColumnDef="excluir">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="excluirBebida(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+    -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
@@ -9,11 +8,11 @@ import { BebidaComponent } from './pages/bebida/bebida.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from './service/auth/auth.service';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LayoutModule } from '@angular/cdk/layout';
@@ -22,20 +21,30 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NavigationComponent } from './pages/navigation/navigation.component';
-import { ComidaComponent } from './pages/comida/comida.component'; 
-import {MatTableModule} from '@angular/material/table'; 
+import { ComidaComponent } from './pages/comida/comida.component';
+import { MatTableModule } from '@angular/material/table';
 import { LOCALE_ID } from '@angular/core';
 import { BebidaInserirDialogComponent } from './pages/bebida-inserir-dialog/bebida-inserir-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select'; 
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
-import { TipoBebidaPipe } from './shared/pipes/tipo-bebida.pipe';
+import { TipoBebidaPipe } from './shared/pipes/tipo-bebida/tipo-bebida.pipe';
 import { BebidaEditarDialogComponent } from './pages/bebida-editar-dialog/bebida-editar-dialog.component';
 import { BebidaService } from './service/bebida/bebida.service';
+import { ComidaInserirDialogComponent } from './pages/comida-inserir-dialog/comida-inserir-dialog.component';
+import { ComidaService } from './service/comida/comida.service';
+import { ComidaEditarDialogComponent } from './pages/comida-editar-dialog/comida-editar-dialog.component';
+import { OrdemRefeicaoPipe } from './shared/pipes/ordem-refeicao/ordem-refeicao.pipe';
+import { ReservaComponent } from './pages/reserva/reserva.component';
+import { ReservaInserirDialogComponent } from './pages/reserva-inserir-dialog/reserva-inserir-dialog.component';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 registerLocaleData(localePt);
 
@@ -70,7 +79,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     BebidaInserirDialogComponent,
     ConfirmDialogComponent,
     TipoBebidaPipe,
-    BebidaEditarDialogComponent
+    OrdemRefeicaoPipe,
+    BebidaEditarDialogComponent,
+    ComidaInserirDialogComponent,
+    ComidaEditarDialogComponent,
+    ReservaComponent,
+    ReservaInserirDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -96,13 +110,20 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatDialogModule,
     CurrencyMaskModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
   ],
   providers: [
     AngularFirestore,
     AuthService,
     BebidaService,
-    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    ComidaService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   bootstrap: [AppComponent]

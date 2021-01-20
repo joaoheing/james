@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Adicionar comida</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Preço</mat-label>
+            <input matInput currencyMask formControlName="preco">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Vegana</mat-label>
+            <mat-select formControlName="isVegana">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Vegetariana</mat-label>
+            <mat-select formControlName="isVegetariana">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Prato do dia</mat-label>
+            <mat-select formControlName="isPratoDoDia">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ordem da refeição</mat-label>
+            <mat-select formControlName="ordemRefeicao">
+                <mat-option *ngFor="let o of ordens" [value]="o.value">{{o.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <textarea matInput formControlName="descricao"></textarea>
+        </mat-form-field>
+    </form>
+</div>
+<div class="footer" mat-dialog-actions>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button cdkFocusInitial [disabled]="!form.valid" (click)="editarComida()">Atualizar</button>
+</div>

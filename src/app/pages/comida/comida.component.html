@@ -1,1 +1,74 @@
-<p>comida works!</p>
+<div class="header">
+    <button mat-raised-button (click)="adicionarComida()" color="primary">
+        <mat-icon>add</mat-icon> Adicionar comidas
+    </button>
+</div>
+
+<table mat-table [dataSource]="comidas" class="mat-elevation-z8">
+
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <!-- Preço Column -->
+    <ng-container matColumnDef="preco">
+        <th mat-header-cell *matHeaderCellDef> Preço </th>
+        <td mat-cell *matCellDef="let element"> {{element.preco | currency:'BRL':true}} </td>
+    </ng-container>
+
+    <!-- isVegana Column -->
+    <ng-container matColumnDef="isVegana">
+        <th mat-header-cell *matHeaderCellDef> Vegana </th>
+        <td mat-cell *matCellDef="let element"> {{element.isVegana ? 'Sim' : 'Não'}} </td>
+    </ng-container>
+
+    <!-- isVegetariana Column -->
+    <ng-container matColumnDef="isVegetariana">
+        <th mat-header-cell *matHeaderCellDef> Vegetariana </th>
+        <td mat-cell *matCellDef="let element"> {{element.isVegetariana ? 'Sim' : 'Não'}} </td>
+    </ng-container>
+
+    <!-- ordemRefeicao Column -->
+    <ng-container matColumnDef="ordemRefeicao">
+        <th mat-header-cell *matHeaderCellDef> Ordem </th>
+        <td mat-cell *matCellDef="let element"> {{element.ordemRefeicao | ordemRefeicao}} </td>
+    </ng-container>
+
+    <!-- isPratoDoDia Column -->
+    <ng-container matColumnDef="isPratoDoDia">
+        <th mat-header-cell *matHeaderCellDef> Prato do dia </th>
+        <td mat-cell *matCellDef="let element"> {{element.isPratoDoDia ? 'Sim' : 'Não'}} </td>
+    </ng-container>
+
+     <!-- Descrição Column -->
+     <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+        <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+    </ng-container>
+
+    
+      <!-- Editar Column -->
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="editarComida(element)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <!-- Excluir Column -->
+    <ng-container matColumnDef="excluir">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="excluirComida(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

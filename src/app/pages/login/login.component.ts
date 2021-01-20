@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       const senha = this.form.get('password')?.value;
       this.authService.login(email,senha).then(
         () =>{
-          this.router.navigateByUrl('/app/bebida');
+          this.router.navigateByUrl('/app/comida');
         }, erro => {
           this.snackBar.open(erro, undefined, {duration: 1111});
         }
