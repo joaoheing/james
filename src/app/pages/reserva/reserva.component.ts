@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ReservaService } from 'src/app/service/reserva/reserva.service';
+import { Reserva, ReservaService } from 'src/app/service/reserva/reserva.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ReservaEditarDialogComponent } from '../reserva-editar-dialog/reserva-editar-dialog.component';
 import { ReservaInserirDialogComponent } from '../reserva-inserir-dialog/reserva-inserir-dialog.component';
 
 @Component({
@@ -14,21 +15,22 @@ export class ReservaComponent implements OnInit {
 
   public reservas: any;
 
-  displayedColumns = ['nome', 'data', 'horario', 'quantidadeDePessoas', 'mesa']
+  displayedColumns = ['nome', 'data', 'horario', 'quantidadeDePessoas', 'mesa', 'editar', 'excluir']
 
   constructor(private reservaService: ReservaService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar) {
-      this.reservaService.listarReservas().subscribe(
-        (reservas) => {
-          this.reservas = reservas.map(reserva => {
-            //adicionado o campo id no objeto reserva =>(r)
-            const r = reserva.payload.doc.data() as any;
-            r.id = reserva.payload.doc.id;
-            return r;
-          });
-        }
-      )
+    this.reservaService.listarReservas().subscribe(
+      (reservas) => {
+        this.reservas = reservas.map(reserva => {
+          //adicionado o campo id no objeto reserva =>(r)
+          const r = reserva.payload.doc.data() as any;
+          r.data = r.data.toDate();
+          r.id = reserva.payload.doc.id;
+          return r;
+        });
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -41,8 +43,8 @@ export class ReservaComponent implements OnInit {
     });
   }
 
-  
-  
+
+
   public excluirReserva(reserva: any): void {
     this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
@@ -55,11 +57,11 @@ export class ReservaComponent implements OnInit {
       excluir => {
         if (excluir) {
           this.reservaService.excluirReserva(reserva.id).then(
-            ()=>{
+            () => {
               this.snackBar.open("A reserva foi excluida com sucesso!", undefined, {
                 duration: 2000,
               });
-            },(erro)=>{
+            }, (erro) => {
               alert(erro)
             }
           )
@@ -68,13 +70,12 @@ export class ReservaComponent implements OnInit {
     );
   }
 
-  /*public editarReserva(reserva: Reserva): void {
+  public editarReserva(reserva: Reserva): void {
     this.dialog.open(ReservaEditarDialogComponent, {
       width: '400px',
-      data: bebida
+      data: reserva
     });
   }
-  */
 
 
 }

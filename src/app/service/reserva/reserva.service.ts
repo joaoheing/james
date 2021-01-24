@@ -3,9 +3,9 @@ import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angu
 import { Observable } from 'rxjs';
 
 export interface Reserva {
-  id: string
+  id?: string
+  nome: string
   data: Date
-  horario: Date
   quantidadeDePessoas: number
   mesa: number
 }

@@ -22,12 +22,23 @@ export class ReservaInserirDialogComponent implements OnInit {
       nome: ['', Validators.required],
       numeroMesa: [1, Validators.compose([Validators.required,Validators.min(1)])],
       quantidadeDePessoas: [1, Validators.compose([Validators.required,Validators.min(1)])],
-      picker: [, Validators.required],
+      data: [null, Validators.required],
+      hora: [new Date(), Validators.required],
     });
   }
 
   public inserirReserva(): void {
-    this.reservaService.inserirReserva(this.form.value).then(
+    const dados = this.form.value;
+    const horario = this.form.value.hora.split(':');
+    const data = dados.data as Date;
+    data.setHours(Number(horario[0]));
+    data.setMinutes(Number(horario[1]));
+   this.reservaService.inserirReserva({
+      mesa: dados.numeroMesa,
+      quantidadeDePessoas: dados.quantidadeDePessoas,
+      nome: dados.nome,
+      data: data
+    }).then(
       () => {
         this.dialogRef.close();
       }, () => {
@@ -37,7 +48,6 @@ export class ReservaInserirDialogComponent implements OnInit {
       }
     )
   }
-
 
   ngOnInit(): void {
   }

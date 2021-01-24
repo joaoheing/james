@@ -44,6 +44,7 @@ import { ReservaInserirDialogComponent } from './pages/reserva-inserir-dialog/re
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { ReservaEditarDialogComponent } from './pages/reserva-editar-dialog/reserva-editar-dialog.component';
 
 
 registerLocaleData(localePt);
@@ -84,7 +85,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ComidaInserirDialogComponent,
     ComidaEditarDialogComponent,
     ReservaComponent,
-    ReservaInserirDialogComponent
+    ReservaInserirDialogComponent,
+    ReservaEditarDialogComponent
   ],
   imports: [
     BrowserModule,
