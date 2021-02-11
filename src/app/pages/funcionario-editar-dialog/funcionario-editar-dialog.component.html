@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Adicionar funcionario</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+
+        <!-- Nome Column -->
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome">
+        </mat-form-field>
+
+        <!-- Email Column -->
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+        
+        <!-- Cargo Column -->
+        <mat-form-field>
+            <mat-label>Cargo</mat-label>
+            <mat-select formControlName="cargo">
+                <mat-option *ngFor="let c of cargos" [value]="c.value">{{c.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+<div class="footer" mat-dialog-actions>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button cdkFocusInitial [disabled]="!form.valid" (click)="editarFuncionario()">Atualizar</button>
+</div>
