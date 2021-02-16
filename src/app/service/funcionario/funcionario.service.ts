@@ -27,7 +27,8 @@ export class FuncionarioService {
 
   private readonly colecao: string = "funcionario";
 
-  constructor(private firestore: AngularFirestore, private auth: AngularFireAuth) { }
+  constructor(private firestore: AngularFirestore, 
+    private auth: AngularFireAuth) { }
 
   public listarFuncionarios(): Observable<DocumentChangeAction<any>[]> {
     return this.firestore.collection(this.colecao).snapshotChanges();

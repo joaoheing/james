@@ -49,6 +49,7 @@ import { MesaComponent } from './pages/mesa/mesa.component';
 import { FuncionarioComponent } from './pages/funcionario/funcionario.component';
 import { FuncionarioInserirDialogComponent } from './pages/funcionario-inserir-dialog/funcionario-inserir-dialog.component';
 import { FuncionarioEditarDialogComponent } from './pages/funcionario-editar-dialog/funcionario-editar-dialog.component';
+import { PeriodoPipe } from './shared/pipes/periodo/periodo.pipe';
 
 
 registerLocaleData(localePt);
@@ -94,7 +95,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MesaComponent,
     FuncionarioComponent,
     FuncionarioInserirDialogComponent,
-    FuncionarioEditarDialogComponent
+    FuncionarioEditarDialogComponent,
+    PeriodoPipe
   ],
   imports: [
     BrowserModule,

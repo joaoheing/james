@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
+export enum Periodo {
+  TARDE = 'Tarde',
+  NOITE = 'Noite'
+}
+
 export interface Reserva {
   id?: string
   nome: string
   data: Date
   quantidadeDePessoas: number
   mesa: number
+  periodo: Periodo
 }
 
 @Injectable({

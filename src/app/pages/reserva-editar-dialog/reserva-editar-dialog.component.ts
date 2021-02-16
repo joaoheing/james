@@ -2,8 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Tipo } from 'src/app/service/bebida/bebida.service';
-import { Reserva, ReservaService } from 'src/app/service/reserva/reserva.service';
+import { Periodo, Reserva, ReservaService } from 'src/app/service/reserva/reserva.service';
 
 @Component({
   selector: 'app-reserva-editar-dialog',
@@ -12,7 +11,7 @@ import { Reserva, ReservaService } from 'src/app/service/reserva/reserva.service
 })
 export class ReservaEditarDialogComponent implements OnInit {
 
-  public tipos: any[];
+  public periodos: any[];
   public form: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -21,9 +20,9 @@ export class ReservaEditarDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public reserva: Reserva,
     private snackBar: MatSnackBar) {
 
-    this.tipos = Object.keys(Tipo).map(k => {
+    this.periodos = Object.keys(Periodo).map(p => {
       return {
-        label: (Tipo as any)[k], value: k
+        label: (Periodo as any)[p], value: p
       }
     })
     this.form = this.formBuilder.group({
@@ -31,7 +30,7 @@ export class ReservaEditarDialogComponent implements OnInit {
       numeroMesa: [reserva.mesa, Validators.compose([Validators.required,Validators.min(1)])],
       quantidadeDePessoas: [reserva.quantidadeDePessoas, Validators.compose([Validators.required,Validators.min(1)])],
       data: [reserva.data, Validators.required],
-      hora: [reserva.data, Validators.required],
+      periodo: [reserva.periodo, Validators.required],
     });
   }
 

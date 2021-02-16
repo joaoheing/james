@@ -15,7 +15,7 @@ export class ReservaComponent implements OnInit {
 
   public reservas: any;
 
-  displayedColumns = ['nome', 'data', 'horario', 'quantidadeDePessoas', 'mesa', 'editar', 'excluir']
+  displayedColumns = ['nome', 'data', 'periodo', 'quantidadeDePessoas', 'mesa', 'editar', 'excluir']
 
   constructor(private reservaService: ReservaService,
     public dialog: MatDialog,
